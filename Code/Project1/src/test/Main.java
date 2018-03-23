@@ -20,11 +20,11 @@ public class Main {
 
         try {
             stmt = conn.createStatement();
-            rs = stmt.executeQuery("SELECT * FROM app_user");
-
+            String query  = "INSERT INTO students " + "VALUES (0,'email','name','cnp','password')";
+            stmt.executeUpdate(query);
             // or alternatively, if you don't know ahead of time that
             // the query will be a SELECT...
-            System.out.println(rs.getFetchSize());
+            System.out.println("statement executed");
 
             // Now do something with the ResultSet ....
         }

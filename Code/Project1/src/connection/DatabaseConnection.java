@@ -15,7 +15,7 @@ import java.sql.Statement;
  */
 public class DatabaseConnection {
     private static final String DRIVER ="com.mysql.jdbc.Driver";
-    private static final String DBURL ="jdbc:mysql://localhost:3306/hybridrpg_db?autoReconnect=true&useSSL=false";
+    private static final String DBURL ="jdbc:mysql://localhost:3306/student_system?autoReconnect=true&useSSL=false";
     private static final String USER= "root";
     private static final String PASS="root";
 
