@@ -7,6 +7,15 @@ public class Student {
     private String CNP;
     private String password;
     private String address;
+    private int group;
+
+    public int getGroup() {
+        return group;
+    }
+
+    public void setGroup(int group) {
+        this.group = group;
+    }
 
     public String getAddress() {
         return address;
@@ -54,5 +63,14 @@ public class Student {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", group=" + group +
+                '}';
     }
 }

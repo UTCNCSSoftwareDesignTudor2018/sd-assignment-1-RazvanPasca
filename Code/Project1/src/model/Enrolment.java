@@ -2,10 +2,10 @@ package model;
 
 import java.sql.Date;
 
-public class enrolments {
+public class Enrolment {
     private Long studentId;
     private Long courseId;
-    private boolean accepted;
+    private boolean status;
     private Date requestDate;
 
     public Long getStudentId() {
@@ -24,12 +24,12 @@ public class enrolments {
         this.courseId = courseId;
     }
 
-    public boolean isAccepted() {
-        return accepted;
+    public boolean getStatus() {
+        return status;
     }
 
-    public void setAccepted(boolean accepted) {
-        this.accepted = accepted;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public Date getRequestDate() {

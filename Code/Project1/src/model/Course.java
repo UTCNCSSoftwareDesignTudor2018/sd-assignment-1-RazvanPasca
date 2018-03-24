@@ -3,8 +3,7 @@ package model;
 public class Course {
     private Long courseId;
     private String name;
-    private Long profId;
-    private Long examId;
+    private Long teacherId;
 
     public Long getCourseId() {
         return courseId;
@@ -22,21 +21,12 @@ public class Course {
         this.name = name;
     }
 
-    public Long getProfId() {
-        return profId;
+    public Long getTeacherId() {
+        return teacherId;
     }
 
-    public void setProfId(Long profId) {
-        this.profId = profId;
+    public void setTeacherId(Long teacherId) {
+        this.teacherId = teacherId;
     }
-
-    public Long getExamId() {
-        return examId;
-    }
-
-    public void setExamId(Long examId) {
-        this.examId = examId;
-    }
-
 
 }
