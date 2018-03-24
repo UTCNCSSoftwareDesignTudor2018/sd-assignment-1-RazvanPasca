@@ -33,6 +33,7 @@ public class Main {
         System.out.println(courses);
         System.out.println(enrolments);
         System.out.println(exams);
-        System.out.println(grades);
+
+
     }
 }
