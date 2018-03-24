@@ -6,6 +6,15 @@ public class Student {
     private String email;
     private String CNP;
     private String password;
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public long getStudentId() {
         return studentId;
