@@ -11,7 +11,7 @@ public class CourseBuilder {
     public static Course createCourse(ResultSet rs) throws SQLException {
         Course course = new Course();
         course.setCourseId(rs.getLong("course_id"));
-        course.setName(rs.getString("name"));
+        course.setName(rs.getString("course_name"));
         course.setTeacherId(rs.getLong("teacher_id"));
         return course;
 

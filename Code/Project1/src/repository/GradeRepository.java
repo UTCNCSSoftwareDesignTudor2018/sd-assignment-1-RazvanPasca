@@ -1,13 +1,14 @@
 package repository;
 
 import model.Grade;
+import model.RegisterEntry;
 
 import java.util.List;
 
 public interface GradeRepository {
     List<Grade> findAll();
 
-    List<Grade> findByStudentId(long id);
+    List<RegisterEntry> findByStudentId(long id);
 
     List<Grade> findByCourseId(long id);
 

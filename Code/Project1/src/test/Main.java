@@ -1,9 +1,17 @@
 package test;
 
+import business.ContextHolder;
+import business.StudentBusiness;
+import repository.CourseRepository;
+import repository.StudentRepository;
+import repository.implementation.CourseRepositoryImpl;
+import repository.implementation.GradeRepositoryImpl;
+import repository.implementation.StudentRepositoryImpl;
+
 public class Main {
 
     public static void main(String args[]) {
-//        StudentRepository studentRepository = new StudentRepositoryImpl();
+        StudentRepository studentRepository = new StudentRepositoryImpl();
 //        studentRepository.delete(Long.valueOf(1));
 //        Student student = new Student();
 //        student.setPassword("asdsadas");
@@ -57,7 +65,12 @@ public class Main {
 ////        System.out.println(enrolments);
 ////        System.out.println(exams);
 
-
+        CourseRepository courseRepository = new CourseRepositoryImpl();
+        System.out.println(courseRepository.findByStudentId(2));
+        ContextHolder ch = new ContextHolder();
+        ch.setCurrentUser(studentRepository.findById(10));
+        StudentBusiness sb = new StudentBusiness(new StudentRepositoryImpl(), new GradeRepositoryImpl(), ch, new CourseRepositoryImpl());
+        System.out.println(sb.viewGrades());
 
     }
 }

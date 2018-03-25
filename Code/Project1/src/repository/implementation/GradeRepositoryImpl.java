@@ -2,10 +2,13 @@ package repository.implementation;
 
 import connection.DatabaseConnection;
 import model.Grade;
+import model.RegisterEntry;
 import repository.GradeRepository;
 import repository.utils.GradeBuilder;
+import repository.utils.RegisterEntryBuilder;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GradeRepositoryImpl implements GradeRepository {
@@ -24,14 +27,20 @@ public class GradeRepositoryImpl implements GradeRepository {
     }
 
     @Override
-    public List<Grade> findByStudentId(long id) {
+    public List<RegisterEntry> findByStudentId(long id) {
         Connection connection = DatabaseConnection.getConnection();
-        List<Grade> grades = null;
+        List<RegisterEntry> grades = new ArrayList<>(10);
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM grades WHERE student_id = ?");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM " +
+                    "grades JOIN courses ON courses.course_id = grades.course_id " +
+                    "    JOIN teachers ON courses.teacher_id = teachers.teacher_id " +
+                    "    JOIN students ON students.student_id = grades.student_id" +
+                    "    WHERE grades.student_id = ?");
             ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
-            grades = GradeBuilder.createGrades(rs);
+            while (rs.next()) {
+                grades.add(RegisterEntryBuilder.createRegisterEntry(rs));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

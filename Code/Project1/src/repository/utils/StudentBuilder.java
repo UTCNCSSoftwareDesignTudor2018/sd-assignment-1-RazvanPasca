@@ -11,8 +11,8 @@ public class StudentBuilder {
     public static Student createStudent(ResultSet rs) throws SQLException {
         Student student = new Student();
         student.setStudentId(rs.getLong("student_id"));
-        student.setEmail(rs.getString("email"));
-        student.setName(rs.getString("name"));
+        student.setEmail(rs.getString("student_email"));
+        student.setName(rs.getString("student_name"));
         student.setCNP(rs.getString("CNP"));
         student.setAddress(rs.getString("address"));
         student.setGroup(rs.getInt("group_1"));

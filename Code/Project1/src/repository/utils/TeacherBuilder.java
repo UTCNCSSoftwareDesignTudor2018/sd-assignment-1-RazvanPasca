@@ -11,8 +11,8 @@ public class TeacherBuilder {
     public static Teacher createTeacher(ResultSet rs) throws SQLException {
 
         Teacher teacher = new Teacher();
-        teacher.setEmail(rs.getString("email"));
-        teacher.setName(rs.getString("name"));
+        teacher.setEmail(rs.getString("teacher_email"));
+        teacher.setName(rs.getString("teacher_name"));
         teacher.setPassword(rs.getString("password"));
         teacher.setTeacherId(rs.getLong("teacher_id"));
         return teacher;

@@ -2,11 +2,15 @@ package repository.implementation;
 
 import connection.DatabaseConnection;
 import model.Course;
+import model.Teacher;
 import repository.CourseRepository;
 import repository.utils.CourseBuilder;
+import repository.utils.TeacherBuilder;
 
 import java.sql.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CourseRepositoryImpl implements CourseRepository {
     @Override
@@ -40,14 +44,17 @@ public class CourseRepositoryImpl implements CourseRepository {
     }
 
     @Override
-    public List<Course> findByStudentId(long id) {
+    public Map<Course, Teacher> findByStudentId(long id) {
         Connection connection = DatabaseConnection.getConnection();
-        List<Course> courses = null;
+        Map<Course, Teacher> courses = null;
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM courses WHERE student_id = ?");
+            PreparedStatement ps = connection.prepareStatement(new StringBuilder().append("SELECT courses.*,teachers.* FROM ").
+                    append("enrolments JOIN courses ON courses.course_id = enrolments.course_id ").
+                    append(" JOIN teachers ON courses.teacher_id = teachers.teacher_id ").
+                    append(" WHERE enrolments.student_id = ?").toString());
             ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
-            courses = CourseBuilder.createCourses(rs);
+            courses = this.createMap(rs);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -74,7 +81,7 @@ public class CourseRepositoryImpl implements CourseRepository {
         Connection connection = DatabaseConnection.getConnection();
         Course course = null;
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM courses WHERE name = ?");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM courses WHERE course_name = ?");
             ps.setString(1, name);
             ResultSet rs = ps.executeQuery();
             if (rs.next())
@@ -90,7 +97,7 @@ public class CourseRepositoryImpl implements CourseRepository {
         Connection connection = DatabaseConnection.getConnection();
         try {
             PreparedStatement ps = connection.prepareStatement("INSERT INTO courses " +
-                    "(course_id, name,teacher_id) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                    "(course_id, course_name,teacher_id) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setLong(1, 0);
             ps.setString(2, course.getName());
             ps.setLong(3, course.getTeacherId());
@@ -101,6 +108,16 @@ public class CourseRepositoryImpl implements CourseRepository {
         }
         return false;
 
+    }
+
+    private Map<Course, Teacher> createMap(ResultSet resultSet) throws SQLException {
+        Map<Course, Teacher> courses = new HashMap<>(10);
+        while (resultSet.next()) {
+            Course course = CourseBuilder.createCourse(resultSet);
+            Teacher teacher = TeacherBuilder.createTeacher(resultSet);
+            courses.put(course, teacher);
+        }
+        return courses;
     }
 }
 

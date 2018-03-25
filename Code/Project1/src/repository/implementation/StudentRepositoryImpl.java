@@ -45,7 +45,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         Connection connection = DatabaseConnection.getConnection();
         Student student = null;
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM students WHERE email = ?");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM students WHERE student_email = ?");
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             if (rs.next())
@@ -61,7 +61,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         Connection connection = DatabaseConnection.getConnection();
         List<Student> students = null;
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM students WHERE name = ?");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM students WHERE student_name = ?");
             ps.setString(1, name);
             ResultSet rs = ps.executeQuery();
             students = StudentBuilder.createStudents(rs);
@@ -76,7 +76,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         Connection connection = DatabaseConnection.getConnection();
         try {
             PreparedStatement ps = connection.prepareStatement("INSERT INTO students " +
-                            "(student_id,email,name,CNP,password,address,group_1) VALUES (?,?,?,?,?,?,?)",
+                            "(student_id,student_email,student_name,CNP,password,address,group_1) VALUES (?,?,?,?,?,?,?)",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setLong(1, 0);
             ps.setString(2, student.getEmail());
@@ -96,7 +96,7 @@ public class StudentRepositoryImpl implements StudentRepository {
     public boolean update(Student student) {
         Connection connection = DatabaseConnection.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("UPDATE students SET email=?,name=?,password=?,address=?,group_1=? WHERE student_id=?",
+            PreparedStatement ps = connection.prepareStatement("UPDATE students SET student_email=?,student_name=?,password=?,address=?,group_1=? WHERE student_id=?",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setLong(1, 0);
             ps.setString(2, student.getEmail());

@@ -1,14 +1,12 @@
 package business;
 
-import model.Course;
-import model.Grade;
-import model.Student;
-import model.User;
+import model.*;
 import repository.CourseRepository;
 import repository.GradeRepository;
 import repository.StudentRepository;
 
 import java.util.List;
+import java.util.Map;
 
 public class StudentBusiness {
     private final StudentRepository studentRepository;
@@ -46,14 +44,15 @@ public class StudentBusiness {
         return contextHolder.getCurrentUser();
     }
 
-    public List<Course> viewCourses() {
+    public Map<Course, Teacher> viewCourses() {
         Student student = (Student) contextHolder.getCurrentUser();
         return courseRepository.findByStudentId(student.getStudentId());
     }
 
 
-    public List<Grade> viewGrades() {
+    public List<RegisterEntry> viewGrades() {
         Student student = (Student) contextHolder.getCurrentUser();
+        System.out.println(student);
         return gradeRepository.findByStudentId(student.getStudentId());
     }
 }
