@@ -96,14 +96,15 @@ public class StudentRepositoryImpl implements StudentRepository {
     public boolean update(Student student) {
         Connection connection = DatabaseConnection.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("UPDATE students SET student_email=?,student_name=?,password=?,address=?,group_1=? WHERE student_id=?",
+            PreparedStatement ps = connection.prepareStatement("UPDATE students SET student_email=?,student_name=?," +
+                            "password=?,address=?,group_1=? WHERE student_id=?",
                     Statement.RETURN_GENERATED_KEYS);
-            ps.setLong(1, 0);
-            ps.setString(2, student.getEmail());
-            ps.setString(3, student.getName());
-            ps.setString(4, student.getPassword());
-            ps.setString(5, student.getAddress());
-            ps.setLong(6, student.getGroup());
+            ps.setString(1, student.getEmail());
+            ps.setString(2, student.getName());
+            ps.setString(3, student.getPassword());
+            ps.setString(4, student.getAddress());
+            ps.setInt(5, student.getGroup());
+            ps.setLong(6, student.getStudentId());
             if (ps.executeUpdate() > 0)
                 return true;
             else

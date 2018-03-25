@@ -4,6 +4,9 @@ import model.*;
 import repository.CourseRepository;
 import repository.GradeRepository;
 import repository.StudentRepository;
+import repository.implementation.CourseRepositoryImpl;
+import repository.implementation.GradeRepositoryImpl;
+import repository.implementation.StudentRepositoryImpl;
 
 import java.util.List;
 import java.util.Map;
@@ -14,11 +17,11 @@ public class StudentBusiness {
     private final ContextHolder contextHolder;
     private final CourseRepository courseRepository;
 
-    public StudentBusiness(StudentRepository studentRepository, GradeRepository gradeRepository, ContextHolder contextHolder, CourseRepository courseRepository) {
-        this.studentRepository = studentRepository;
-        this.gradeRepository = gradeRepository;
+    public StudentBusiness(ContextHolder contextHolder) {
+        this.studentRepository = new StudentRepositoryImpl();
+        this.gradeRepository = new GradeRepositoryImpl();
         this.contextHolder = contextHolder;
-        this.courseRepository = courseRepository;
+        this.courseRepository = new CourseRepositoryImpl();
     }
 
     public boolean login(String email, String password) {
