@@ -9,6 +9,19 @@ public class Student implements User {
     private String address;
     private int group;
 
+    public Student(Student student) {
+        this.studentId = student.getStudentId();
+        this.name = student.getName();
+        this.email = student.getEmail();
+        this.CNP = student.getCNP();
+        this.password = student.getPassword();
+        this.address = student.getAddress();
+        this.group = student.getGroup();
+    }
+
+    public Student() {
+    }
+
     public int getGroup() {
         return group;
     }
@@ -68,8 +81,11 @@ public class Student implements User {
     @Override
     public String toString() {
         return "Student{" +
-                "name='" + name + '\'' +
+                "studentId=" + studentId +
+                ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
+                ", CNP='" + CNP + '\'' +
+                ", address='" + address + '\'' +
                 ", group=" + group +
                 '}';
     }

@@ -17,44 +17,44 @@ public class StudentMenuView extends JFrame {
         this.setVisible(true);
     }
 
-    public JTextField getNameTextField() {
-        return nameTextField;
+    public String getNameTextField() {
+        return nameTextField.getText();
     }
 
     public void setNameTextField(String nameTextField) {
         this.nameTextField.setText(nameTextField);
     }
 
-    public JTextField getEmailTextField() {
-        return emailTextField;
+    public String getEmailTextField() {
+        return emailTextField.getText();
     }
 
     public void setEmailTextField(String emailTextField) {
         this.emailTextField.setText(emailTextField);
     }
 
-    public JTextField getAddressTextField() {
-        return addressTextField;
+    public String getAddressTextField() {
+        return addressTextField.getText();
     }
 
     public void setAddressTextField(String addressTextField) {
         this.addressTextField.setText(addressTextField);
     }
 
-    public JTextField getGroupTextField() {
-        return groupTextField;
+    public String getGroupTextField() {
+        return groupTextField.getText();
     }
 
-    public void setGroupTextField(JTextField groupTextField) {
-        this.groupTextField = groupTextField;
+    public void setGroupTextField(String groupTextField) {
+        this.groupTextField.setText(groupTextField);
     }
 
-    public JTextField getCNPTextField() {
-        return CNPTextField;
+    public String getCNPTextField() {
+        return CNPTextField.getText();
     }
 
-    public void setCNPTextField(JTextField CNPTextField) {
-        this.CNPTextField = CNPTextField;
+    public void setCNPTextField(String CNPTextField) {
+        this.CNPTextField.setText(CNPTextField);
     }
 
     public void addUpdateProfileListener(ActionListener e) {
@@ -120,13 +120,13 @@ public class StudentMenuView extends JFrame {
                 contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
                                 .addGap(38, 38, 38)
-                                .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                .addGroup(contentPaneLayout.createParallelGroup()
                                         .addGroup(contentPaneLayout.createSequentialGroup()
-                                                .addComponent(updateProfileButton, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(updateProfileButton)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(viewCoursesButton, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(viewGradesButton))
+                                                .addComponent(viewGradesButton, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE))
                                         .addGroup(contentPaneLayout.createSequentialGroup()
                                                 .addGroup(contentPaneLayout.createParallelGroup()
                                                         .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
@@ -136,8 +136,8 @@ public class StudentMenuView extends JFrame {
                                                                 .addComponent(label4, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
                                                         .addComponent(label5))
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(contentPaneLayout.createParallelGroup()
-                                                        .addComponent(nameTextField)
+                                                .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
                                                         .addComponent(emailTextField)
                                                         .addComponent(addressTextField)
                                                         .addComponent(groupTextField)

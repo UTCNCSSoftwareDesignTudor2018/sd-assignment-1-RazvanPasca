@@ -14,13 +14,14 @@ import java.util.Map;
 
 public class CourseRepositoryImpl implements CourseRepository {
     @Override
-    public List<Course> findAll() {
+    public Map<Course, Teacher> findAll() {
         Connection connection = DatabaseConnection.getConnection();
-        List<Course> courses = null;
+        Map<Course, Teacher> courses = null;
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM courses");
+            PreparedStatement ps = connection.prepareStatement("SELECT courses.*, teachers.* FROM courses JOIN " +
+                    "teachers ON courses.teacher_id = teachers.teacher_id");
             ResultSet rs = ps.executeQuery();
-            courses = CourseBuilder.createCourses(rs);
+            courses = this.createMap(rs);
         } catch (SQLException e) {
             e.printStackTrace();
         }

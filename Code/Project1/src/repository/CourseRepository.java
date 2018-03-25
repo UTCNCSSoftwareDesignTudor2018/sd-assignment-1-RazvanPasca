@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface CourseRepository {
-    List<Course> findAll();
+    Map<Course, Teacher> findAll();
 
     Course findById(long id);
 

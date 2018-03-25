@@ -49,7 +49,8 @@ public class StudentBusiness {
 
     public Map<Course, Teacher> viewCourses() {
         Student student = (Student) contextHolder.getCurrentUser();
-        return courseRepository.findByStudentId(student.getStudentId());
+        return courseRepository.findAll();
+//        return courseRepository.findByStudentId(student.getStudentId());
     }
 
 
