@@ -3,24 +3,24 @@ package model;
 import java.sql.Date;
 
 public class Enrolment {
-    private Long studentId;
-    private Long courseId;
+    private long studentId;
+    private long courseId;
     private boolean status;
     private Date requestDate;
 
-    public Long getStudentId() {
+    public long getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(Long studentId) {
+    public void setStudentId(long studentId) {
         this.studentId = studentId;
     }
 
-    public Long getCourseId() {
+    public long getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(Long courseId) {
+    public void setCourseId(long courseId) {
         this.courseId = courseId;
     }
 
@@ -38,5 +38,15 @@ public class Enrolment {
 
     public void setRequestDate(Date requestDate) {
         this.requestDate = requestDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Enrolment{" +
+                "studentId=" + studentId +
+                ", courseId=" + courseId +
+                ", status=" + status +
+                ", requestDate=" + requestDate +
+                '}';
     }
 }

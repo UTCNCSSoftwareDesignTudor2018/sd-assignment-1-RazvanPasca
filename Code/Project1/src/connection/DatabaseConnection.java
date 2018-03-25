@@ -3,11 +3,7 @@
  */
 package connection;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * @author pasca
@@ -15,7 +11,7 @@ import java.sql.Statement;
  */
 public class DatabaseConnection {
     private static final String DRIVER ="com.mysql.jdbc.Driver";
-    private static final String DBURL ="jdbc:mysql://localhost:3306/student_system?autoReconnect=true&useSSL=false";
+    private static final String DBURL = "jdbc:mysql://localhost:3306/student_system1?autoReconnect=true&useSSL=false";
     private static final String USER= "root";
     private static final String PASS="root";
 

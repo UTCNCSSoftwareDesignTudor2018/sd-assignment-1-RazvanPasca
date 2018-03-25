@@ -1,15 +1,26 @@
 package model;
 
+import java.sql.Date;
+
 public class Grade {
-    private Long studentId;
+    private long studentId;
     private long courseId;
     private int grade;
+    private Date date;
 
-    public Long getStudentId() {
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public long getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(Long studentId) {
+    public void setStudentId(long studentId) {
         this.studentId = studentId;
     }
 
@@ -27,5 +38,14 @@ public class Grade {
 
     public void setGrade(int grade) {
         this.grade = grade;
+    }
+
+    @Override
+    public String toString() {
+        return "Grade{" +
+                "studentId=" + studentId +
+                ", courseId=" + courseId +
+                ", grade=" + grade +
+                '}';
     }
 }

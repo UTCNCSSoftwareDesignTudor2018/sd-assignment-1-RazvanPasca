@@ -1,15 +1,15 @@
 package model;
 
 public class Course {
-    private Long courseId;
+    private long courseId;
     private String name;
-    private Long teacherId;
+    private long teacherId;
 
-    public Long getCourseId() {
+    public long getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(Long courseId) {
+    public void setCourseId(long courseId) {
         this.courseId = courseId;
     }
 
@@ -21,12 +21,20 @@ public class Course {
         this.name = name;
     }
 
-    public Long getTeacherId() {
+    public long getTeacherId() {
         return teacherId;
     }
 
-    public void setTeacherId(Long teacherId) {
+    public void setTeacherId(long teacherId) {
         this.teacherId = teacherId;
     }
 
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseId=" + courseId +
+                ", name='" + name + '\'' +
+                ", teacherId=" + teacherId +
+                '}';
+    }
 }

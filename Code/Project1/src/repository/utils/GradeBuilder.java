@@ -14,6 +14,7 @@ public class GradeBuilder {
         grade.setCourseId(rs.getLong("course_id"));
         grade.setGrade(rs.getInt("grade"));
         grade.setStudentId(rs.getLong("student_id"));
+        grade.setDate(rs.getDate("date"));
         return grade;
     }
 

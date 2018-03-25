@@ -1,16 +1,16 @@
 package model;
 
-public class Teacher {
-    private Long teacherId;
+public class Teacher implements User {
+    private long teacherId;
     private String name;
     private String email;
     private String password;
 
-    public Long getTeacherId() {
+    public long getTeacherId() {
         return teacherId;
     }
 
-    public void setTeacherId(Long teacherId) {
+    public void setTeacherId(long teacherId) {
         this.teacherId = teacherId;
     }
 

@@ -3,14 +3,22 @@ package model;
 import java.sql.Date;
 
 public class Exam {
-    private Long courseId;
+    @Override
+    public String toString() {
+        return "Exam{" +
+                "courseId=" + courseId +
+                ", examDate=" + examDate +
+                '}';
+    }
+
+    private long courseId;
     private Date examDate;
 
-    public Long getCourseId() {
+    public long getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(Long courseId) {
+    public void setCourseId(long courseId) {
         this.courseId = courseId;
     }
 

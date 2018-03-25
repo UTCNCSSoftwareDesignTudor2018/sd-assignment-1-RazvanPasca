@@ -15,7 +15,7 @@ public class StudentBuilder {
         student.setName(rs.getString("name"));
         student.setCNP(rs.getString("CNP"));
         student.setAddress(rs.getString("address"));
-        student.setGroup(rs.getInt("groupp"));
+        student.setGroup(rs.getInt("group_1"));
         student.setPassword(rs.getString("password"));
 
         return student;

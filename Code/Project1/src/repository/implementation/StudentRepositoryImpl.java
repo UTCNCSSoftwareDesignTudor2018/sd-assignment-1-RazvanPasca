@@ -25,7 +25,7 @@ public class StudentRepositoryImpl implements StudentRepository {
     }
 
     @Override
-    public Student findById(Long id) {
+    public Student findById(long id) {
         Connection connection = DatabaseConnection.getConnection();
         Student student = null;
         try {
@@ -76,14 +76,15 @@ public class StudentRepositoryImpl implements StudentRepository {
         Connection connection = DatabaseConnection.getConnection();
         try {
             PreparedStatement ps = connection.prepareStatement("INSERT INTO students " +
-                            "(student_id,email,name,password,address,groupp) VALUES (?,?,?,?,?,?)",
+                            "(student_id,email,name,CNP,password,address,group_1) VALUES (?,?,?,?,?,?,?)",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setLong(1, 0);
             ps.setString(2, student.getEmail());
             ps.setString(3, student.getName());
-            ps.setString(4, student.getPassword());
-            ps.setString(5, student.getAddress());
-            ps.setLong(6, student.getGroup());
+            ps.setString(4, student.getCNP());
+            ps.setString(5, student.getPassword());
+            ps.setString(6, student.getAddress());
+            ps.setLong(7, student.getGroup());
             return ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -95,7 +96,7 @@ public class StudentRepositoryImpl implements StudentRepository {
     public boolean update(Student student) {
         Connection connection = DatabaseConnection.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("UPDATE students SET email=?,name=?,password=?,address=?,groupp=? WHERE student_id=?",
+            PreparedStatement ps = connection.prepareStatement("UPDATE students SET email=?,name=?,password=?,address=?,group_1=? WHERE student_id=?",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setLong(1, 0);
             ps.setString(2, student.getEmail());
@@ -114,10 +115,10 @@ public class StudentRepositoryImpl implements StudentRepository {
     }
 
     @Override
-    public boolean delete(Long id) {
+    public boolean delete(long id) {
         Connection connection = DatabaseConnection.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM students WHERE student_id = id");
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM students WHERE student_id = ?");
             ps.setLong(1, id);
             if (ps.executeUpdate() > 0)
                 return true;

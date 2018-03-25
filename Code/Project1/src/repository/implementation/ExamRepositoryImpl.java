@@ -39,7 +39,7 @@ public class ExamRepositoryImpl implements ExamRepository {
     }
 
     @Override
-    public Exam findById(Long id) {
+    public Exam findById(long id) {
         Connection connection = DatabaseConnection.getConnection();
         Exam exam = null;
         try {

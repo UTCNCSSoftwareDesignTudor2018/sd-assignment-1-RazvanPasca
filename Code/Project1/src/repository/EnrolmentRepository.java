@@ -8,9 +8,9 @@ import java.util.List;
 public interface EnrolmentRepository {
     List<Enrolment> findAll();
 
-    List<Enrolment> findByStudentId(Long id);
+    List<Enrolment> findByStudentId(long id);
 
-    List<Enrolment> findByCourseId(Long id);
+    List<Enrolment> findByCourseId(long id);
 
     List<Enrolment> findByStatus(Boolean status);
 

@@ -1,6 +1,6 @@
 package model;
 
-public class Student {
+public class Student implements User {
     private long studentId;
     private String name;
     private String email;

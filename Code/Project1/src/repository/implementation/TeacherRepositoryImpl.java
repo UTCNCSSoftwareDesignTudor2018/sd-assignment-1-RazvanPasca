@@ -25,7 +25,7 @@ public class TeacherRepositoryImpl implements TeacherRepository {
     }
 
     @Override
-    public Teacher findById(Long id) {
+    public Teacher findById(long id) {
         Connection connection = DatabaseConnection.getConnection();
         Teacher teacher = null;
         try {

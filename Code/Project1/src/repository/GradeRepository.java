@@ -7,9 +7,9 @@ import java.util.List;
 public interface GradeRepository {
     List<Grade> findAll();
 
-    List<Grade> findByStudentId(Long id);
+    List<Grade> findByStudentId(long id);
 
-    List<Grade> findByCourseId(Long id);
+    List<Grade> findByCourseId(long id);
 
     boolean saveGrade(Grade grade);
 

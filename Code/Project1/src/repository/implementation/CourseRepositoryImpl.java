@@ -24,7 +24,7 @@ public class CourseRepositoryImpl implements CourseRepository {
     }
 
     @Override
-    public Course findById(Long id) {
+    public Course findById(long id) {
         Connection connection = DatabaseConnection.getConnection();
         Course course = null;
         try {
@@ -40,7 +40,22 @@ public class CourseRepositoryImpl implements CourseRepository {
     }
 
     @Override
-    public List<Course> findByTeacherId(Long id) {
+    public List<Course> findByStudentId(long id) {
+        Connection connection = DatabaseConnection.getConnection();
+        List<Course> courses = null;
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM courses WHERE student_id = ?");
+            ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
+            courses = CourseBuilder.createCourses(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return courses;
+    }
+
+    @Override
+    public List<Course> findByTeacherId(long id) {
         Connection connection = DatabaseConnection.getConnection();
         List<Course> courses = null;
         try {
@@ -74,7 +89,7 @@ public class CourseRepositoryImpl implements CourseRepository {
     public boolean saveCourse(Course course) {
         Connection connection = DatabaseConnection.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO teachers " +
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO courses " +
                     "(course_id, name,teacher_id) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setLong(1, 0);
             ps.setString(2, course.getName());

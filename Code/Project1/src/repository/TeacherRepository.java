@@ -7,7 +7,7 @@ import java.util.List;
 public interface TeacherRepository {
     List<Teacher> findAll();
 
-    Teacher findById(Long id);
+    Teacher findById(long id);
 
     List<Teacher> findByName(String email);
 

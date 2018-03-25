@@ -24,7 +24,7 @@ public class GradeRepositoryImpl implements GradeRepository {
     }
 
     @Override
-    public List<Grade> findByStudentId(Long id) {
+    public List<Grade> findByStudentId(long id) {
         Connection connection = DatabaseConnection.getConnection();
         List<Grade> grades = null;
         try {
@@ -39,7 +39,7 @@ public class GradeRepositoryImpl implements GradeRepository {
     }
 
     @Override
-    public List<Grade> findByCourseId(Long id) {
+    public List<Grade> findByCourseId(long id) {
         Connection connection = DatabaseConnection.getConnection();
         List<Grade> grades = null;
         try {
@@ -58,10 +58,11 @@ public class GradeRepositoryImpl implements GradeRepository {
         Connection connection = DatabaseConnection.getConnection();
         try {
             PreparedStatement ps = connection.prepareStatement("INSERT INTO grades " +
-                    "(student_id, course_id,grade) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                    "(student_id, course_id,grade,date) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setLong(1, grade.getStudentId());
             ps.setLong(2, grade.getCourseId());
             ps.setLong(3, grade.getGrade());
+            ps.setDate(4, grade.getDate());
             return ps.execute();
 
         } catch (SQLException e) {
@@ -74,11 +75,14 @@ public class GradeRepositoryImpl implements GradeRepository {
     public boolean updateGrade(Grade grade) {
         Connection connection = DatabaseConnection.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("UPDATE grades SET student_id=?,course_id=?,grade=? WHERE student_id=? AND course_id = ?",
+            PreparedStatement ps = connection.prepareStatement("UPDATE grades SET student_id=?,course_id=?,grade=?,date = ? WHERE student_id=? AND course_id = ?",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setLong(1, grade.getStudentId());
             ps.setLong(2, grade.getCourseId());
             ps.setLong(3, grade.getGrade());
+            ps.setDate(4, grade.getDate());
+            ps.setLong(5, grade.getStudentId());
+            ps.setLong(6, grade.getCourseId());
             if (ps.executeUpdate() > 0)
                 return true;
             else

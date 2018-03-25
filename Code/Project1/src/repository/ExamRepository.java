@@ -10,7 +10,7 @@ public interface ExamRepository {
 
     List<Exam> findByDate(Date date);
 
-    Exam findById(Long id);
+    Exam findById(long id);
 
     boolean saveExam(Exam exam);
 }

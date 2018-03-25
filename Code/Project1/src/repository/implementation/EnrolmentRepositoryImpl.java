@@ -25,7 +25,7 @@ public class EnrolmentRepositoryImpl implements EnrolmentRepository {
     }
 
     @Override
-    public List<Enrolment> findByStudentId(Long id) {
+    public List<Enrolment> findByStudentId(long id) {
         Connection connection = DatabaseConnection.getConnection();
         List<Enrolment> enrolments = null;
         try {
@@ -40,7 +40,7 @@ public class EnrolmentRepositoryImpl implements EnrolmentRepository {
     }
 
     @Override
-    public List<Enrolment> findByCourseId(Long id) {
+    public List<Enrolment> findByCourseId(long id) {
         Connection connection = DatabaseConnection.getConnection();
         List<Enrolment> enrolments = null;
         try {
@@ -89,7 +89,7 @@ public class EnrolmentRepositoryImpl implements EnrolmentRepository {
         Connection connection = DatabaseConnection.getConnection();
         try {
             PreparedStatement ps = connection.prepareStatement("INSERT INTO enrolments " +
-                    "(student_id, course_id,requeste_date,status) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                    "(student_id, course_id,request_date,status) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setLong(1, enrolment.getStudentId());
             ps.setLong(2, enrolment.getCourseId());
             ps.setDate(3, enrolment.getRequestDate());

@@ -7,9 +7,11 @@ import java.util.List;
 public interface CourseRepository {
     List<Course> findAll();
 
-    Course findById(Long id);
+    Course findById(long id);
 
-    List<Course> findByTeacherId(Long id);
+    List<Course> findByStudentId(long id);
+
+    List<Course> findByTeacherId(long id);
 
     Course findByName(String name);
 
