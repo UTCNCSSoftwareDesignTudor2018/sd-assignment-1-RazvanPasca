@@ -16,4 +16,6 @@ public interface StudentBusiness {
     Map<Course, Teacher> viewCourses();
 
     public List<RegisterEntry> viewGrades();
+
+    boolean enroll(long courseId);
 }

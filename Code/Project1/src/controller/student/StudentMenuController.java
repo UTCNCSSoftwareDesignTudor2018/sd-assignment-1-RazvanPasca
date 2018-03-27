@@ -1,27 +1,29 @@
 package controller.student;
 
-import business.EnrolmentBusiness;
 import business.StudentBusiness;
+import controller.StudentCoursesListener;
+import controller.StudentGradesListener;
 import model.Course;
+import model.RegisterEntry;
 import model.Student;
 import model.Teacher;
 import view.CoursesTableModel;
 import view.CoursesView;
+import view.student.StudentGradeView;
 import view.student.StudentMenuView;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class StudentMenuController {
     private StudentBusiness studentBusiness;
     private StudentMenuView studentMenuView;
-    private EnrolmentBusiness enrolmentBusiness;
 
-    public StudentMenuController(StudentBusiness studentBusiness, StudentMenuView studentMenuView, EnrolmentBusiness enrolmentBusiness) {
+
+    public StudentMenuController(StudentBusiness studentBusiness, StudentMenuView studentMenuView) {
         this.studentBusiness = studentBusiness;
         this.studentMenuView = studentMenuView;
-        this.enrolmentBusiness = enrolmentBusiness;
-
         this.addListeners();
         this.initializeViewFields();
 
@@ -34,26 +36,36 @@ public class StudentMenuController {
             student.setName(studentMenuView.getNameTextField());
             student.setCNP(studentMenuView.getCNPTextField());
             student.setAddress(studentMenuView.getAddressTextField());
-            System.out.println(student);
-            System.out.println(studentBusiness.updateProfile(student));
         });
 
-
+        //add listener to open the courses window which allows the student to enroll on a selected course
+        //if not already enrolled
         this.studentMenuView.addViewCoursesListener(e -> {
             Map<Course, Teacher> courses = studentBusiness.viewCourses();
             CoursesTableModel coursesTableModel = new CoursesTableModel(new ArrayList<Teacher>(courses.values()),
                     new ArrayList<Course>(courses.keySet()), 10);
-            // courses.forEach((k,v)-> System.out.println("course " + k + " teacher " + v));
             CoursesView coursesView = new CoursesView(coursesTableModel);
-//            coursesView.addTableContent(new CoursesTableModel(new ArrayList<Teacher>(courses.values()),
-//                    new ArrayList<Course>(courses.keySet()),10));
             coursesView.setTableModel(coursesTableModel);
             coursesView.setVisible(true);
 
-            coursesView.addEnrollListener(new StudentCoursesListener(coursesView.getCourseTable(), enrolmentBusiness));
-
-
+            //have a separate class for courses listener
+            coursesView.addEnrollListener(new StudentCoursesListener(coursesView.getCourseTable(), studentBusiness));
         });
+
+
+        //add listener for viewing grades
+        //together with opening the new view
+        //and adding combobox listener
+        this.studentMenuView.addViewGradesListener(e -> {
+                    List<RegisterEntry> registerEntries = studentBusiness.viewGrades();
+                    StudentGradeView studentGradeView = new StudentGradeView();
+                    studentGradeView.setComboBoxItems(registerEntries);
+                    studentGradeView.setVisible(true);
+
+                    studentGradeView.addComboBoxListener(new StudentGradesListener(studentGradeView.getCourseSelectionBox(),
+                            registerEntries, studentGradeView));
+                }
+        );
 
 
     }

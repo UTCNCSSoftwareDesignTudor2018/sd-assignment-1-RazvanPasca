@@ -15,6 +15,7 @@ public class StudentMenuView extends JFrame {
     public StudentMenuView() {
         initComponents();
         this.setVisible(true);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     public String getNameTextField() {
@@ -113,6 +114,9 @@ public class StudentMenuView extends JFrame {
 
         //---- viewGradesButton ----
         viewGradesButton.setText("view grades");
+
+        //---- groupTextField ----
+        groupTextField.setEditable(false);
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);

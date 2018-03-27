@@ -31,11 +31,12 @@ public class GradeRepositoryImpl implements GradeRepository {
         Connection connection = DatabaseConnection.getConnection();
         List<RegisterEntry> grades = new ArrayList<>(10);
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM " +
-                    "grades JOIN courses ON courses.course_id = grades.course_id " +
-                    "    JOIN teachers ON courses.teacher_id = teachers.teacher_id " +
-                    "    JOIN students ON students.student_id = grades.student_id" +
-                    "    WHERE grades.student_id = ?");
+            PreparedStatement ps = connection.prepareStatement("SELECT students.*, courses.*, grades.*, teachers.* FROM students\n" +
+                    "\tJOIN enrolments ON students.student_id = enrolments.student_id\n" +
+                    "    LEFT JOIN grades ON enrolments.student_id = grades.student_id\n" +
+                    "    JOIN courses ON courses.course_id = enrolments.course_id\n" +
+                    "    JOIN teachers ON courses.teacher_id = teachers.teacher_id\n" +
+                    "    WHERE students.student_id = ?");
             ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -84,7 +85,8 @@ public class GradeRepositoryImpl implements GradeRepository {
     public boolean updateGrade(Grade grade) {
         Connection connection = DatabaseConnection.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("UPDATE grades SET student_id=?,course_id=?,grade=?,date = ? WHERE student_id=? AND course_id = ?",
+            PreparedStatement ps = connection.prepareStatement("UPDATE grades SET student_id=?,course_id=?,grade=?," +
+                            "date = ? WHERE student_id=? AND course_id = ?",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setLong(1, grade.getStudentId());
             ps.setLong(2, grade.getCourseId());
@@ -92,10 +94,7 @@ public class GradeRepositoryImpl implements GradeRepository {
             ps.setDate(4, grade.getDate());
             ps.setLong(5, grade.getStudentId());
             ps.setLong(6, grade.getCourseId());
-            if (ps.executeUpdate() > 0)
-                return true;
-            else
-                return false;
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
