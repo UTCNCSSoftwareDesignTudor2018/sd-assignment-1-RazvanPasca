@@ -8,6 +8,17 @@ public class Enrolment {
     private boolean status;
     private Date requestDate;
 
+    public Enrolment(long studentId, long courseId, boolean status, Date requestDate) {
+        this.studentId = studentId;
+        this.courseId = courseId;
+        this.status = status;
+        this.requestDate = requestDate;
+    }
+
+    public Enrolment() {
+
+    }
+
     public long getStudentId() {
         return studentId;
     }

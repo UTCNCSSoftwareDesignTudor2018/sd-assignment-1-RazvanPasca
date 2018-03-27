@@ -98,6 +98,7 @@ public class EnrolmentRepositoryImpl implements EnrolmentRepository {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("Duplicate key when adding new enrolment, student is already enrolled");
         }
         return false;
     }

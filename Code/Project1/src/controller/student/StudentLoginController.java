@@ -1,7 +1,9 @@
 package controller.student;
 
 
+import business.EnrolmentBusiness;
 import business.StudentBusiness;
+import business.business.implementation.EnrolmentBusinessImpl;
 import view.student.StudentLoginView;
 import view.student.StudentMenuView;
 
@@ -10,25 +12,26 @@ import java.awt.event.ActionListener;
 
 public class StudentLoginController {
     private StudentBusiness studentBusiness;
-    private StudentLoginView studentMenuView;
+    private StudentLoginView studentLoginView;
 
-    public StudentLoginController(StudentBusiness userBusiness) {
+    public StudentLoginController(StudentBusiness userBusiness, StudentLoginView studentLoginView) {
         this.studentBusiness = userBusiness;
-        StudentLoginView studentMenuView = new StudentLoginView();
-        this.studentMenuView = studentMenuView;
+        // StudentLoginView studentMenuView = new StudentLoginView();
+        this.studentLoginView = studentLoginView;
         this.addListeners();
     }
 
     private void addListeners() {
-        studentMenuView.addLoginListener(new ActionListener() {
+        studentLoginView.addLoginListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String email = studentMenuView.getEmailField();
-                String password = studentMenuView.getPasswordField();
+                String email = studentLoginView.getEmailField();
+                String password = studentLoginView.getPasswordField();
                 if (studentBusiness.login(email, password)) {
-                    studentMenuView.dispose();
+                    studentLoginView.dispose();
                     StudentMenuView studentMenuView = new StudentMenuView();
-                    StudentMenuController studentMenuController = new StudentMenuController(studentBusiness, studentMenuView);
+                    EnrolmentBusiness enrolmentBusiness = new EnrolmentBusinessImpl();
+                    StudentMenuController studentMenuController = new StudentMenuController(studentBusiness, studentMenuView, enrolmentBusiness);
                 }
             }
         });
