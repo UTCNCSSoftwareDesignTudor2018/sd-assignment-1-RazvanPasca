@@ -47,7 +47,8 @@ public class RegisterEntry {
 
     @Override
     public String toString() {
-        return student.getName() + " " + course.getName() + " " +
-                grade.getGrade() + " " + teacher.getName();
+        return "Student name:" + student.getName() + " " + "Course name:" + course.getName() + " " +
+                "Grade:" + grade.getGrade() + " " + "Teacher:" + teacher.getName() +
+                " Date:" + grade.getDate() + "\n";
     }
 }
