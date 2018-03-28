@@ -1,14 +1,14 @@
 package controller.student;
 
 import business.StudentBusiness;
-import controller.StudentCoursesListener;
-import controller.StudentGradesListener;
+import controller.listener.StudentCoursesListener;
+import controller.listener.StudentGradesListener;
 import model.Course;
 import model.RegisterEntry;
 import model.Student;
 import model.Teacher;
 import view.CoursesTableModel;
-import view.CoursesView;
+import view.student.StudentCoursesView;
 import view.student.StudentGradeView;
 import view.student.StudentMenuView;
 
@@ -44,9 +44,8 @@ public class StudentMenuController {
             Map<Course, Teacher> courses = studentBusiness.viewCourses();
             CoursesTableModel coursesTableModel = new CoursesTableModel(new ArrayList<Teacher>(courses.values()),
                     new ArrayList<Course>(courses.keySet()), 10);
-            CoursesView coursesView = new CoursesView(coursesTableModel);
+            StudentCoursesView coursesView = new StudentCoursesView(coursesTableModel);
             coursesView.setTableModel(coursesTableModel);
-            coursesView.setVisible(true);
 
             //have a separate class for courses listener
             coursesView.addEnrollListener(new StudentCoursesListener(coursesView.getCourseTable(), studentBusiness));
@@ -60,7 +59,6 @@ public class StudentMenuController {
                     List<RegisterEntry> registerEntries = studentBusiness.viewGrades();
                     StudentGradeView studentGradeView = new StudentGradeView();
                     studentGradeView.setComboBoxItems(registerEntries);
-                    studentGradeView.setVisible(true);
 
                     studentGradeView.addComboBoxListener(new StudentGradesListener(studentGradeView.getCourseSelectionBox(),
                             registerEntries, studentGradeView));

@@ -1,7 +1,10 @@
 import business.ContextHolder;
+import business.StudentBusiness;
+import business.TeacherBusiness;
 import business.business.implementation.StudentBusinessImpl;
+import business.business.implementation.TeacherBusinessImpl;
 import controller.LoginController;
-import view.student.LoginView;
+import view.LoginView;
 
 import java.awt.*;
 
@@ -13,8 +16,10 @@ public class Main {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 LoginView loginView = new LoginView();
-                StudentBusinessImpl studentBusiness = new StudentBusinessImpl(new ContextHolder());
-                LoginController loginController = new LoginController(studentBusiness, loginView);
+                ContextHolder ch = new ContextHolder();
+                StudentBusiness studentBusiness = new StudentBusinessImpl(ch);
+                TeacherBusiness teacherBusiness = new TeacherBusinessImpl(ch);
+                LoginController loginController = new LoginController(studentBusiness, teacherBusiness, loginView);
 
             }
         });

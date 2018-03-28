@@ -6,6 +6,16 @@ public class Teacher implements User {
     private String email;
     private String password;
 
+    public Teacher(Teacher currentUser) {
+        this.teacherId = currentUser.teacherId;
+        this.name = currentUser.name;
+        this.email = currentUser.email;
+        this.password = currentUser.password;
+    }
+
+    public Teacher() {
+    }
+
     public long getTeacherId() {
         return teacherId;
     }

@@ -46,6 +46,7 @@ public class Grade {
                 "studentId=" + studentId +
                 ", courseId=" + courseId +
                 ", grade=" + grade +
+                ", date=" + date +
                 '}';
     }
 }

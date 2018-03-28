@@ -89,4 +89,60 @@ public class Student implements User {
                 ", group=" + group +
                 '}';
     }
+
+    public static class Builder {
+        private String address = "default";
+        private String password = "default";
+        private String CNP = "default";
+        private String email;
+        private String name;
+        private int group;
+        private final int id = 0;
+
+        public Builder setAddress(String address) {
+            this.address = address;
+            return this;
+        }
+
+        public Builder setPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public Builder setCNP(String CNP) {
+            this.CNP = CNP;
+            return this;
+        }
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder setEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder setGroup(int group) {
+            this.group = group;
+            return this;
+        }
+
+        public Student build() {
+            return new Student(this);
+        }
+
+
+    }
+
+    private Student(Builder builder) {
+        name = builder.name;
+        CNP = builder.CNP;
+        address = builder.address;
+        email = builder.email;
+        group = builder.group;
+        studentId = builder.id;
+        password = builder.password;
+    }
 }

@@ -10,6 +10,8 @@ public interface GradeRepository {
 
     List<RegisterEntry> findByStudentId(long id);
 
+    List<RegisterEntry> findByTeacherId(long id);
+
     List<Grade> findByCourseId(long id);
 
     boolean saveGrade(Grade grade);
