@@ -20,7 +20,6 @@ public class Main {
                 StudentBusiness studentBusiness = new StudentBusinessImpl(ch);
                 TeacherBusiness teacherBusiness = new TeacherBusinessImpl(ch);
                 LoginController loginController = new LoginController(studentBusiness, teacherBusiness, loginView);
-
             }
         });
     }
