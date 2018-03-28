@@ -27,7 +27,7 @@ public class ReportWriter {
             bw.write("there are no entries for this student");
         else
             for (RegisterEntry registerEntry : registerEntries) {
-                bw.write(registerEntry.toString());
+                bw.write(registerEntry.toString() + "\n");
             }
     }
 

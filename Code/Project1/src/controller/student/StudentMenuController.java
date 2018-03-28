@@ -78,10 +78,6 @@ public class StudentMenuController {
 
     }
 
-    /*TODO
-     * implement the view grades functionality, together with the view courses aka:
-     * show all enrolled courses and also the grades where it is necessary*/
-
     private void initializeViewFields() {
         Student student = (Student) studentBusiness.viewProfile();
         studentMenuView.setNameTextField(student.getName());
