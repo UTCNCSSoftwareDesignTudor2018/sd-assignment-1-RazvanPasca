@@ -1,6 +1,6 @@
 package controller.validator;
 
-public class PositiveNumberValidator implements NumberValidator {
+public class PositiveNumberValidator implements Validator {
 
     @Override
     public boolean validate(String string) {

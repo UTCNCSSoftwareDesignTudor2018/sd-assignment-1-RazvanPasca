@@ -1,5 +1,5 @@
 package controller.validator;
 
-public interface NumberValidator {
+public interface Validator {
     boolean validate(String target);
 }

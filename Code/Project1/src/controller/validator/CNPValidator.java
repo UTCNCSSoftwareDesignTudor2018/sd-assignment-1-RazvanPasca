@@ -1,6 +1,6 @@
 package controller.validator;
 
-public class CNPValidator implements NumberValidator {
+public class CNPValidator implements Validator {
 
     @Override
     public boolean validate(String target) {

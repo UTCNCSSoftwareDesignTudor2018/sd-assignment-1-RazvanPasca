@@ -97,10 +97,15 @@ public class Student implements User {
         private String email;
         private String name;
         private int group;
-        private final int id = 0;
+        private long id = 0;
 
         public Builder setAddress(String address) {
             this.address = address;
+            return this;
+        }
+
+        public Builder setId(long id) {
+            this.id = id;
             return this;
         }
 

@@ -3,6 +3,9 @@ package controller.student;
 import business.StudentBusiness;
 import controller.listener.StudentCoursesListener;
 import controller.listener.StudentGradesListener;
+import controller.validator.CNPValidator;
+import controller.validator.EmailValidator;
+import controller.validator.GeneralStringValidator;
 import model.Course;
 import model.RegisterEntry;
 import model.Student;
@@ -32,10 +35,20 @@ public class StudentMenuController {
     private void addListeners() {
         this.studentMenuView.addUpdateProfileListener(e -> {
             Student student = new Student((Student) studentBusiness.viewProfile());
-            student.setEmail(studentMenuView.getEmailTextField());
-            student.setName(studentMenuView.getNameTextField());
-            student.setCNP(studentMenuView.getCNPTextField());
-            student.setAddress(studentMenuView.getAddressTextField());
+            EmailValidator emailValidator = new EmailValidator();
+            GeneralStringValidator generalStringValidator = new GeneralStringValidator();
+            CNPValidator cnpValidator = new CNPValidator();
+            if (emailValidator.validate(studentMenuView.getEmailTextField()) &&
+                    generalStringValidator.validate(studentMenuView.getNameTextField()) &&
+                    cnpValidator.validate(studentMenuView.getCNPTextField()) &&
+                    generalStringValidator.validate(studentMenuView.getAddressTextField())
+                    ) {
+                student.setEmail(studentMenuView.getEmailTextField());
+                student.setName(studentMenuView.getNameTextField());
+                student.setCNP(studentMenuView.getCNPTextField());
+                student.setAddress(studentMenuView.getAddressTextField());
+            } else
+                studentMenuView.setNameTextField("Invalid fields entered");
         });
 
         //add listener to open the courses window which allows the student to enroll on a selected course
@@ -59,12 +72,9 @@ public class StudentMenuController {
                     List<RegisterEntry> registerEntries = studentBusiness.viewGrades();
                     StudentGradeView studentGradeView = new StudentGradeView();
                     studentGradeView.setComboBoxItems(registerEntries);
-
-                    studentGradeView.addComboBoxListener(new StudentGradesListener(studentGradeView.getCourseSelectionBox(),
-                            registerEntries, studentGradeView));
+            studentGradeView.addComboBoxListener(new StudentGradesListener(registerEntries, studentGradeView));
                 }
         );
-
 
     }
 
