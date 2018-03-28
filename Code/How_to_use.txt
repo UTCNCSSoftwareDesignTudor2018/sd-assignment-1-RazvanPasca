@@ -1,0 +1,8 @@
+For using this app you require the following dependencies:
+1. MySQL Server + DB
+2. Java 1.8
+3. JDBC Connector
+4. An IDE of your choice
+
+To use the app: login either as student with one of the accounts (labus@fanus.com, password 123 for student) or demo@now.com, password 123 for teacher
+Navigate through the interface using the intuitive buttons
