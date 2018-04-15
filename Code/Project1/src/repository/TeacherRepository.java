@@ -14,5 +14,7 @@ public interface TeacherRepository {
     Teacher findByEmail(String email);
 
     boolean saveTeacher(Teacher teacher);
+
+    boolean updateTeacher(Teacher teacher);
 }
 

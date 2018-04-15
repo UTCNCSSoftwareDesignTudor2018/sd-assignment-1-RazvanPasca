@@ -85,7 +85,7 @@ public class StudentRepositoryImpl implements StudentRepository {
             ps.setString(5, student.getPassword());
             ps.setString(6, student.getAddress());
             ps.setLong(7, student.getGroup());
-            return ps.execute();
+            return (ps.executeUpdate() > 0);
         } catch (SQLException e) {
             e.printStackTrace();
         }

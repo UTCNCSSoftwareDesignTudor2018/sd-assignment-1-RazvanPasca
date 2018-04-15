@@ -81,7 +81,25 @@ public class TeacherRepositoryImpl implements TeacherRepository {
             ps.setString(2, teacher.getName());
             ps.setString(3, teacher.getEmail());
             ps.setString(4, teacher.getPassword());
-            return ps.execute();
+            return (ps.executeUpdate() > 0);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateTeacher(Teacher teacher) {
+        Connection connection = DatabaseConnection.getConnection();
+        try {
+            PreparedStatement ps = connection.prepareStatement("UPDATE teachers SET teacher_name=?, teacher_email=?," +
+                    " password=? where teacher_id =?", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, teacher.getName());
+            ps.setString(2, teacher.getEmail());
+            ps.setString(3, teacher.getPassword());
+            ps.setLong(4, 0);
+            return (ps.executeUpdate() > 0);
 
         } catch (SQLException e) {
             e.printStackTrace();

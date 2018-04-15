@@ -95,7 +95,7 @@ public class GradeRepositoryImpl implements GradeRepository {
             ps.setLong(2, grade.getCourseId());
             ps.setLong(3, grade.getGrade());
             ps.setDate(4, grade.getDate());
-            return ps.execute();
+            return (ps.executeUpdate() > 0);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -117,7 +117,7 @@ public class GradeRepositoryImpl implements GradeRepository {
             ps.setDate(4, grade.getDate());
             ps.setLong(5, grade.getStudentId());
             ps.setLong(6, grade.getCourseId());
-            return ps.executeUpdate() > 0;
+            return (ps.executeUpdate() > 0);
         } catch (SQLException e) {
             e.printStackTrace();
         }
